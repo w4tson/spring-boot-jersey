@@ -1,28 +1,29 @@
-
 apply plugin: 'java'
 apply plugin: 'org.springframework.boot'
+apply plugin: 'io.spring.dependency-management'
 
-buildscript { 
+buildscript {
     ext {
-        springBootVersion = '1.5.2.RELEASE'
-        springDependencyPluginVersion = '0.5.4.RELEASE'
+        springBootVersion = '2.0.0.RC1'
     }
     repositories {
         jcenter()
+        maven {
+            url 'https://repo.spring.io/libs-milestone'
+        }
     }
     dependencies {
-        classpath("io.spring.gradle:dependency-management-plugin:${springDependencyPluginVersion}")
         classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
     }
 }
 
 repositories {
-    jcenter()
+    mavenCentral()
+    maven { url "https://repo.spring.io/snapshot" }
+    maven { url "https://repo.spring.io/milestone" }
 }
 
-dependencies {    
-//    compile 'org.springframework.boot:spring-boot-starter-web'
-    
+dependencies {
     compile 'org.springframework.boot:spring-boot-starter-jersey'
     compile 'org.springframework.boot:spring-boot-starter-tomcat'
     compile 'org.webjars:webjars-locator:0.32-1'
